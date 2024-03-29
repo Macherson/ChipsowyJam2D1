@@ -6,6 +6,8 @@ extends Node2D
 @export var GreenTop: Marker2D
 @export var GreenBot: Marker2D
 
+@export var MidCenter: Marker2D
+
 @export var crabpack: PackedScene
 
 var crab_scene = preload("res://crab.tscn")
@@ -31,8 +33,10 @@ func _on_spawn_pressed():
 	spawn(pos)
 	
 func spawn(pos):
-	var crab = crab_scene.instantiate()
+	var crab : CharacterBody2D
+	crab = crabpack.instantiate()
 	crab.position = pos
 	add_child(crab)
+	crab.set_movement_target(MidCenter.position)
 	
 	

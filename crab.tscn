@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://7f8ltxk06dya"]
+[gd_scene load_steps=10 format=3 uid="uid://7f8ltxk06dya"]
 
 [ext_resource type="Script" path="res://crab.gd" id="1_1anqc"]
 [ext_resource type="Texture2D" uid="uid://bh2mlae51lbej" path="res://CoralCrabIdleSide.png" id="1_ppl76"]
@@ -47,9 +47,18 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Crab" type="CharacterBody2D" node_paths=PackedStringArray("parent")]
+[sub_resource type="LabelSettings" id="LabelSettings_lj5gx"]
+font_size = 21
+
+[node name="Crab" type="CharacterBody2D" node_paths=PackedStringArray("parent", "healthLabel")]
 script = ExtResource("1_1anqc")
 parent = NodePath(".")
+healthLabel = NodePath("ProgressBar/HealthLabel")
+movement_speed = 20.0
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+neighbor_distance = 250.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -6.5)
@@ -72,3 +81,16 @@ scale = Vector2(0.1, 0.1)
 max_value = 10.0
 step = 1.0
 value = 10.0
+show_percentage = false
+
+[node name="HealthLabel" type="Label" parent="ProgressBar"]
+layout_mode = 0
+offset_right = 130.0
+offset_bottom = 30.0
+text = "10"
+label_settings = SubResource("LabelSettings_lj5gx")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="value_changed" from="ProgressBar" to="." method="_on_progress_bar_value_changed"]
