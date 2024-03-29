@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://7f8ltxk06dya"]
+
+[ext_resource type="Script" path="res://crab.gd" id="1_1anqc"]
+[ext_resource type="Texture2D" uid="uid://bh2mlae51lbej" path="res://CoralCrabIdleSide.png" id="1_ppl76"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxrtj"]
+size = Vector2(15, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xtxgv"]
+atlas = ExtResource("1_ppl76")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r16kr"]
+atlas = ExtResource("1_ppl76")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p60hg"]
+atlas = ExtResource("1_ppl76")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ht84h"]
+atlas = ExtResource("1_ppl76")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mwb8j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xtxgv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r16kr")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p60hg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ht84h")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[node name="Crab" type="CharacterBody2D" node_paths=PackedStringArray("parent")]
+script = ExtResource("1_1anqc")
+parent = NodePath(".")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -6.5)
+shape = SubResource("RectangleShape2D_hxrtj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_mwb8j")
+animation = &"Attack"
+autoplay = "Walk"
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+modulate = Color(0, 1, 0, 1)
+self_modulate = Color(0, 1, 0, 1)
+offset_left = -7.0
+offset_top = -16.0
+offset_right = 123.0
+offset_bottom = 13.0
+scale = Vector2(0.1, 0.1)
+max_value = 10.0
+step = 1.0
+value = 10.0
