@@ -12,5 +12,5 @@ func _ready():
 func _process(delta):
 	inputx = (int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left")))
 	inputy = (int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up")))
-	position.x = inputx * speed
-	position.y = inputy * speed
+	position.x += inputx * speed * delta
+	position.y += inputy * speed * delta

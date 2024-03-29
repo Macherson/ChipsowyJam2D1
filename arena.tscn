@@ -112,6 +112,7 @@ position = Vector2(326, 278)
 anchor_mode = 0
 ignore_rotation = false
 script = ExtResource("5_v3lfb")
+speed = 300
 
 [node name="Spawn" type="Button" parent="Camera"]
 offset_left = 933.0
