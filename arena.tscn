@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bri8qfb0jjudo"]
+[gd_scene load_steps=11 format=3 uid="uid://bri8qfb0jjudo"]
 
 [ext_resource type="Script" path="res://arena.gd" id="1_jl2gy"]
 [ext_resource type="Texture2D" uid="uid://bfjd87xmt0npr" path="res://Sprite-0001-Sheet.png" id="1_klh52"]
 [ext_resource type="PackedScene" uid="uid://7f8ltxk06dya" path="res://crab.tscn" id="2_6ppsx"]
 [ext_resource type="Texture2D" uid="uid://o1a0pqlpghu2" path="res://Sprite-0002-Sheet.jpeg" id="2_eyleu"]
+[ext_resource type="PackedScene" uid="uid://d3ktip8oatlen" path="res://goat.tscn" id="3_jpm46"]
 [ext_resource type="Script" path="res://Camera.gd" id="5_v3lfb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v64ef"]
@@ -86,6 +87,7 @@ GreenTop = NodePath("Spawners/GreenTopSpawn")
 GreenBot = NodePath("Spawners/GreenBotSpawn")
 MidCenter = NodePath("MidCenter")
 crabpack = ExtResource("2_6ppsx")
+goatpack = ExtResource("3_jpm46")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ddaci")
@@ -137,7 +139,6 @@ position = Vector2(609, 55)
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(326, 278)
 anchor_mode = 0
-ignore_rotation = false
 zoom = Vector2(2.5, 2.5)
 script = ExtResource("5_v3lfb")
 speed = 300

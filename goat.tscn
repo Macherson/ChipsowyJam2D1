@@ -1,35 +1,35 @@
-[gd_scene load_steps=15 format=3 uid="uid://7f8ltxk06dya"]
+[gd_scene load_steps=15 format=3 uid="uid://d3ktip8oatlen"]
 
-[ext_resource type="Script" path="res://crab.gd" id="1_1anqc"]
-[ext_resource type="Texture2D" uid="uid://bh2mlae51lbej" path="res://CoralCrabIdleSide.png" id="1_ppl76"]
+[ext_resource type="Script" path="res://Goat.gd" id="1_3rvx2"]
+[ext_resource type="Texture2D" uid="uid://s66v1lf3o2lp" path="res://NibblingGoatIdleSide.png" id="2_bv8ng"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxrtj"]
-size = Vector2(13, 7)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crpma"]
+size = Vector2(13, 8)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xtxgv"]
-atlas = ExtResource("1_ppl76")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r16kr"]
-atlas = ExtResource("1_ppl76")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p60hg"]
-atlas = ExtResource("1_ppl76")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ki623"]
+atlas = ExtResource("2_bv8ng")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ht84h"]
-atlas = ExtResource("1_ppl76")
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpcbg"]
+atlas = ExtResource("2_bv8ng")
 region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_mwb8j"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_owip8"]
+atlas = ExtResource("2_bv8ng")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rdm5"]
+atlas = ExtResource("2_bv8ng")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x6tt6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xtxgv")
+"texture": SubResource("AtlasTexture_ki623")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_r16kr")
+"texture": SubResource("AtlasTexture_rpcbg")
 }],
 "loop": true,
 "name": &"Attack",
@@ -37,26 +37,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_p60hg")
+"texture": SubResource("AtlasTexture_owip8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ht84h")
+"texture": SubResource("AtlasTexture_8rdm5")
 }],
 "loop": true,
 "name": &"Walk",
 "speed": 5.0
 }]
 
-[sub_resource type="LabelSettings" id="LabelSettings_lj5gx"]
+[sub_resource type="LabelSettings" id="LabelSettings_nsnjn"]
 font_size = 21
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wplk4"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ui021"]
 radius = 62.0081
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jrby7"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_cju2y"]
 radius = 29.0172
 
-[sub_resource type="Animation" id="Animation_qvay4"]
+[sub_resource type="Animation" id="Animation_mwj6b"]
 resource_name = "Attack"
 loop_mode = 1
 tracks/0/type = "value"
@@ -78,7 +78,7 @@ tracks/1/path = NodePath("AnimatedSprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.3, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 0]
@@ -96,7 +96,7 @@ tracks/2/keys = {
 "values": [true, false, true, false, true, false, true, false, true, false, true]
 }
 
-[sub_resource type="Animation" id="Animation_o3wkq"]
+[sub_resource type="Animation" id="Animation_5jqil"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -123,38 +123,36 @@ tracks/1/keys = {
 "values": [false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qmdid"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m38ne"]
 _data = {
-"Attack": SubResource("Animation_qvay4"),
-"RESET": SubResource("Animation_o3wkq")
+"Attack": SubResource("Animation_mwj6b"),
+"RESET": SubResource("Animation_5jqil")
 }
 
-[node name="Crab" type="CharacterBody2D" node_paths=PackedStringArray("healthLabel")]
-script = ExtResource("1_1anqc")
+[node name="Goat" type="CharacterBody2D" node_paths=PackedStringArray("healthLabel")]
+script = ExtResource("1_3rvx2")
 healthLabel = NodePath("HealthLabel")
-movement_speed = 45.0
+movement_speed = 50.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-avoidance_enabled = true
-neighbor_distance = 250.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -3.5)
-shape = SubResource("RectangleShape2D_hxrtj")
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_crpma")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
-sprite_frames = SubResource("SpriteFrames_mwb8j")
+sprite_frames = SubResource("SpriteFrames_x6tt6")
 animation = &"Attack"
 frame = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 modulate = Color(0, 1, 0, 1)
 self_modulate = Color(0, 1, 0, 1)
-offset_left = -7.0
-offset_top = -16.0
-offset_right = 123.0
-offset_bottom = 13.0
+offset_left = -6.0
+offset_top = -18.0
+offset_right = 114.0
+offset_bottom = 9.0
 scale = Vector2(0.1, 0.1)
 max_value = 10.0
 step = 1.0
@@ -162,27 +160,28 @@ value = 10.0
 show_percentage = false
 
 [node name="HealthLabel" type="Label" parent="."]
-offset_left = -7.0
-offset_top = -16.0
-offset_right = 123.0
-offset_bottom = 14.0
+offset_left = -1.0
+offset_top = -18.0
+offset_right = 19.0
+offset_bottom = 5.0
 scale = Vector2(0.1, 0.1)
-text = "10"
-label_settings = SubResource("LabelSettings_lj5gx")
+text = "10
+"
+label_settings = SubResource("LabelSettings_nsnjn")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SpotArea" type="Area2D" parent="."]
 
 [node name="SpotCollision" type="CollisionShape2D" parent="SpotArea"]
-position = Vector2(0, -4)
-shape = SubResource("CircleShape2D_wplk4")
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_ui021")
 
 [node name="HitArea" type="Area2D" parent="."]
 
 [node name="HitCollision" type="CollisionShape2D" parent="HitArea"]
 position = Vector2(0, -6)
-shape = SubResource("CircleShape2D_jrby7")
+shape = SubResource("CircleShape2D_cju2y")
 
 [node name="AttackCD" type="Timer" parent="."]
 one_shot = true
@@ -190,11 +189,13 @@ autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_qmdid")
+"": SubResource("AnimationLibrary_m38ne")
 }
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="value_changed" from="ProgressBar" to="." method="_on_progress_bar_value_changed"]
 [connection signal="body_entered" from="SpotArea" to="." method="_on_spot_area_body_entered"]
+[connection signal="body_exited" from="SpotArea" to="." method="_on_spot_area_body_exited"]
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
+[connection signal="body_exited" from="HitArea" to="." method="_on_hit_area_body_exited"]
 [connection signal="timeout" from="AttackCD" to="." method="_on_attack_cd_timeout"]

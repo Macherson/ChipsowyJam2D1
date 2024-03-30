@@ -9,7 +9,7 @@ extends CharacterBody2D
 @onready var progressBar: ProgressBar = get_node("ProgressBar")
 
 var alive = true
-var green = false
+var green = true
 var chase = null
 var isAttacking = null
 var enemyChase
@@ -33,7 +33,7 @@ func _physics_process(delta):
 		queue_free()
 	if alive:
 		if isAttacking:
-			direction = Vector2.ZERO
+			direction = Vector2.ZERO 
 			direction = move_and_slide()
 			animation.play("Attack")
 			attack(enemy)
@@ -64,20 +64,20 @@ func damaged(amount):
 	progressBar.value -= amount
 
 func _on_spot_area_body_entered(body):
-	if body.green == true:
+	if body.green != true:
 		enemyChase = body
 		chase = true
 		print("enter")
 
 
 func _on_spot_area_body_exited(body):
-	if body.green == true:
+	if body.green != true:
 		chase = false
 		print("exit")
 
 
 func _on_hit_area_body_entered(body):
-	if body.green == true:
+	if body.green != true:
 		enemy = body
 		print("targetlock")
 		isAttacking = true
@@ -96,5 +96,5 @@ func attack(enemy):
 
 
 func _on_hit_area_body_exited(body):
-	if body.green == true:
+	if body.green != true:
 		isAttacking = false
