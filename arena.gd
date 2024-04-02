@@ -21,16 +21,16 @@ func _ready():
 
 func _on_spawn_pressed():
 	var pos
-	pos = get_node("Spawners/BlueTopSpawn").position
-	spawnCrab(pos)
-	pos = get_node("Spawners/BlueMidSpawn").position
-	spawnCrab(pos)
+	#pos = get_node("Spawners/BlueTopSpawn").position
+	#spawnCrab(pos)
+	#pos = get_node("Spawners/BlueMidSpawn").position
+	#spawnCrab(pos)
 	pos = get_node("Spawners/BlueBotSpawn").position
 	spawnCrab(pos)
-	pos = get_node("Spawners/GreenTopSpawn").position
-	spawnGoat(pos)
-	pos = get_node("Spawners/GreenMidSpawn").position
-	spawnGoat(pos)
+	#pos = get_node("Spawners/GreenTopSpawn").position
+	#spawnGoat(pos)
+	#pos = get_node("Spawners/GreenMidSpawn").position
+	#spawnGoat(pos)
 	pos = get_node("Spawners/GreenBotSpawn").position
 	spawnGoat(pos)
 	

@@ -12,7 +12,6 @@ var alive = true
 var green = true
 var chase = null
 var isAttacking = null
-var enemyChase
 var enemy
 var direction
 var canAttack
@@ -20,27 +19,27 @@ var health = 10
 
 func _ready():
 	healthLabel.text = "10"
-	
+
 func set_movement_target(movement_target: Vector2):
 	navigation_agent.set_target_position(movement_target)
 
+func death():
+	alive = false
+	get_node("AnimatedSprite2D").get_parent().visible = false
+	get_node("SpotArea").monitoring = false
+	get_node("HitArea").monitoring = false
+	get_node("CollisionShape2D").disabled = true
+
 func _physics_process(delta):
-	direction = Vector2.ZERO
 	if health <= 0:
-		alive = false
-	if alive == false:
-		characterCollision.disabled = true
-		queue_free()
+		death()
 	if alive:
-		if isAttacking:
-			direction = Vector2.ZERO 
-			direction = move_and_slide()
+		if isAttacking and enemy.alive:
 			animation.play("Attack")
-			attack(enemy)
+			attack()
 		if !isAttacking:
 			if chase == true:
-				direction = position.direction_to(enemyChase.position) * movement_speed 
-				direction = move_and_slide()
+				position += (enemy.position - position)/movement_speed
 			else:
 				if navigation_agent.is_navigation_finished():
 					return
@@ -65,7 +64,7 @@ func damaged(amount):
 
 func _on_spot_area_body_entered(body):
 	if body.green != true:
-		enemyChase = body
+		enemy = body
 		chase = true
 		print("enter")
 
@@ -78,6 +77,8 @@ func _on_spot_area_body_exited(body):
 
 func _on_hit_area_body_entered(body):
 	if body.green != true:
+		chase = false
+		velocity = Vector2.ZERO
 		enemy = body
 		print("targetlock")
 		isAttacking = true
@@ -87,14 +88,10 @@ func _on_attack_cd_timeout():
 	print("canAttack")
 	canAttack = true
 
-func attack(enemy):
+func attack():
 	if isAttacking:
 		if canAttack:
 			enemy.damaged(3)
 			$AttackCD.start(1)
 			canAttack = false
 
-
-func _on_hit_area_body_exited(body):
-	if body.green != true:
-		isAttacking = false
